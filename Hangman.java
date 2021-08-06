@@ -9,7 +9,7 @@ import javax.sound.sampled.*;
 
 public class Hangman {
     public static void main(String[] args) throws IOException, UnsupportedAudioFileException, LineUnavailableException {
-        File letThereBeSound = new File("thinking_music.wav");
+        File letThereBeSound = new File("Family_Friendly_Noose_Song.wav");
         AudioInputStream audioStream = AudioSystem.getAudioInputStream(letThereBeSound);
         Clip clip = AudioSystem.getClip();
         clip.open(audioStream);
@@ -34,8 +34,8 @@ public class Hangman {
         int incorrectGuess = 0;
         System.out.println(gallows[0]);
         while(true) {
-
             clip.start();
+            clip.loop(3);
             printWordState(word, playerGuesses);
             System.out.println();
             if(!getPlayerGuess(inputDevice, word, playerGuesses)){
@@ -45,7 +45,16 @@ public class Hangman {
                 System.out.println("Congratulations!");
                 System.out.println("You've won the game, saved your buddy and no longer have to worry about potential murder charges!");
                 System.out.println("Thanks for playing!");
-                break;
+                System.out.println("Would you like to save another friend? yes or no:");
+                if(inputDevice.nextLine().equals("yes")){
+                    System.out.println();
+                    System.out.println(gallows[0]);
+                    incorrectGuess = 0;
+                    continue;
+                }else{
+                    System.out.println("Okay. Come back again soon!");
+                    break;
+                }
             }
             if(incorrectGuess == 1){
                 System.out.println(gallows[1]);
@@ -75,7 +84,16 @@ public class Hangman {
                 System.out.println("The bad news? You better buy a suit. You have a funeral to attend to.");
                 System.out.println("I am sorry but you lost the game.");
                 System.out.println("The word was: " + word);
-                break;
+                System.out.println("Would you like to try and save another friend? yes or no:");
+                if(inputDevice.nextLine().equals("yes")){
+                    System.out.println();
+                    System.out.println(gallows[0]);
+                    incorrectGuess = 0;
+                    continue;
+                }else{
+                    System.out.println("Okay. Come back again soon!");
+                    break;
+                }
             }
             System.out.println();
             System.out.println("You now have a chance to guess the word and save your buddy.");
@@ -89,14 +107,34 @@ public class Hangman {
                     System.out.println("You've won the game, saved your buddy and no longer have to worry about potential murder charges!");
                     System.out.print("Thanks for playing!");
                     System.out.println();
-                    break;
+                    System.out.println("Would you like to save another friend? yes or no:");
+                    if(inputDevice.nextLine().equals("yes")){
+                        System.out.println();
+                        System.out.println(gallows[0]);
+                        incorrectGuess = 0;
+                        continue;
+                    }else{
+                        System.out.println("Okay. Come back again soon!");
+                        break;
+                    }
                 }else{
                     System.out.println();
                     System.out.println("The good news? You don't have to worry about the $20 you owe Cecil.");
                     System.out.println("The bad news? You have to explain to Cecil's wife why she's now a widow...");
                     System.out.println("I am sorry but you lost the game.");
                     System.out.println("The word was: " + word);
-                    break;
+                    System.out.println(gallows[6]);
+                    System.out.println();
+                    System.out.println("Would you like to try and save another friend? yes or no:");
+                    if(inputDevice.nextLine().equals("yes")){
+                        System.out.println();
+                        System.out.println(gallows[0]);
+                        incorrectGuess = 0;
+                        continue;
+                    }else{
+                        System.out.println("Okay. Come back again soon!");
+                        break;
+                    }
                 }
             }else{
                 System.out.println("You either spelled yes wrong or you aren't much of a gambler");
